@@ -1,0 +1,41 @@
+Aprovisionamiento Mínimo de la VM (Ubuntu / WSL)
+
+1. Requisitos del Sistema
+SO: Ubuntu 20.04 / 22.04 LTS (ejecutado en WSL2 o Máquina Virtual).
+
+Paquetes base requeridos: python3, python3-pip, python3-venv, git.
+
+2. Comandos de Instalación y Configuración del Entorno
+
+Abre la terminal de Ubuntu y ejecuta los siguientes comandos en orden:
+
+# 1. Actualizar el índice de paquetes del sistema
+sudo apt update && sudo apt upgrade -y
+
+# 2. Instalar Python 3 y la herramienta para entornos virtuales
+sudo apt install -y python3 python3-pip python3-venv git
+
+# 3. Crear el directorio de trabajo del proyecto
+mkdir -p ~/lab2 && cd ~/lab2
+
+# 4. Crear el entorno virtual aislado para aislar las dependencias
+python3 -m venv env
+
+# 5. Activar el entorno virtual
+source env/bin/activate
+
+# 6. Actualizar pip e instalar la librería oficial del SDK de Azure IoT
+pip install --upgrade pip
+pip install azure-iot-device
+3. Ejecución del Script de Telemetría
+Una vez configurado el entorno y creado el archivo IoTCentralSender.py:
+
+Bash
+# Asegurarse de tener el entorno virtual activo (debe mostrar (env) al inicio de la línea)
+source env/bin/activate
+
+# Limpiar caché de credenciales de sesión anterior (si aplica)
+rm -rf ~/.iotc_cache
+
+# Ejecutar el script que envía los datos de telemetría a Azure IoT Central
+python3 IoTCentralSender.py
